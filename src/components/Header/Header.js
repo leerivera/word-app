@@ -5,7 +5,10 @@ import "./Header.css"
 export const Header = () => {
     const darkTheme = createMuiTheme({
         palette: {
-          type: 'dark',
+          primary: {
+            main: '#fff'
+          },
+          type: "dark",
         },
       });
     return (
