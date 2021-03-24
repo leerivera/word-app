@@ -1,8 +1,10 @@
-import {  createMuiTheme, MenuItem, TextField, ThemeProvider } from '@material-ui/core'
+import {  createMuiTheme, TextField, ThemeProvider } from '@material-ui/core'
 import React from 'react'
+import categories from "../../data/category";
+import MenuItem from "@material-ui/core/MenuItem";
 import "./Header.css"
 
-export const Header = () => {
+export const Header = ({setCategory, category}) => {
     const darkTheme = createMuiTheme({
         palette: {
           primary: {
@@ -11,37 +13,49 @@ export const Header = () => {
           type: "dark",
         },
       });
+
+       const handleChange = (e) => {
+         setCategory(e.target.value);
+
+       };
+      //  const handleText = (text) => {
+      //    console.log(text);
+
+      //  };
     return (
         <div className="header">
             <span className="title">Word Hunt</span>
             <div className="inputs">
               <ThemeProvider theme = { darkTheme }>
-               <TextField id="standard-basic" label="Standard" />
+               
                <TextField
-                      id="standard-select-currency"
+                      className="search"
+                      id="filled-basic"
                       select
-                      label="Select"
+                      label="Search for word"
                       
-                      helperText="Please select your currency"
+                      // onChange={(e) = handleText(e.target.value)}
                     >
                       
-                        <MenuItem >
-                          
-                          English
-                        </MenuItem>
                       
-                    </TextField>
+                      
+                </TextField>
                     <TextField
-                      id="standard-select-currency-native"
+                      
                       select
-                      label="Native select"
-                      // value={}
-                      // onChange={}
-                      SelectProps={{
-                        native: true,
-                      }}
-                      helperText="Please select your currency"
-                    ></TextField>
+                      label="Language"
+                      value={category}
+                      onChange={(e) =>handleChange(e)}
+                      className="select"
+                      
+                      
+                    >
+                        {categories.map((option) => (
+                           <MenuItem key={option.label} value={option.label}>
+                                {option.value}
+                           </MenuItem>
+                     ))}
+                    </TextField>
               </ThemeProvider>
 
             </div>
