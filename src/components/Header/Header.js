@@ -4,7 +4,7 @@ import categories from "../../data/category";
 import MenuItem from "@material-ui/core/MenuItem";
 import "./Header.css"
 
-export const Header = ({setCategory, category}) => {
+export const Header = ({setCategory, category, word, setWord}) => {
     const darkTheme = createMuiTheme({
         palette: {
           primary: {
@@ -24,22 +24,25 @@ export const Header = ({setCategory, category}) => {
       //  };
     return (
         <div className="header">
-            <span className="title">Word Hunt</span>
+            <span className="title">{word ? word : "Word Hunt"}</span>
             <div className="inputs">
               <ThemeProvider theme = { darkTheme }>
                
                <TextField
                       className="search"
-                      id="filled-basic"
-                      select
+                      id="filled basic"
+                      value={word}
+                      
+                      
                       label="Search for word"
+                      onChange={(e) => setWord(e.target.value)}
                       
                       // onChange={(e) = handleText(e.target.value)}
-                    >
+                    />
                       
                       
                       
-                </TextField>
+              
                     <TextField
                       
                       select
