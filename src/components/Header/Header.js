@@ -4,24 +4,26 @@ import categories from "../../data/category";
 import MenuItem from "@material-ui/core/MenuItem";
 import "./Header.css"
 
-export const Header = ({setCategory, category, word, setWord}) => {
+export const Header = ({setCategory, category, word, setWord, setMeaning, LightTheme,}) => {
     const darkTheme = createMuiTheme({
         palette: {
           primary: {
-            main: '#fff'
+            main: LightTheme ? "#000" : "#fff",
           },
-          type: "dark",
+          type: LightTheme ? "light" : "dark"
         },
       });
 
        const handleChange = (e) => {
          setCategory(e.target.value);
+         setWord("");
+         setMeaning([]);
 
        };
-      //  const handleText = (text) => {
-      //    console.log(text);
+       const handleText = (text) => {
+         console.log(text);
 
-      //  };
+       };
     return (
         <div className="header">
             <span className="title">{word ? word : "Word Hunt"}</span>
@@ -31,11 +33,11 @@ export const Header = ({setCategory, category, word, setWord}) => {
                <TextField
                       className="search"
                       id="filled basic"
-                      value={word}
+                      // value={word}
                       
                       
                       label="Search for word"
-                      onChange={(e) => setWord(e.target.value)}
+                      onChange={(e) => handleText(e.target.value)}
                       
                       // onChange={(e) = handleText(e.target.value)}
                     />
@@ -48,7 +50,7 @@ export const Header = ({setCategory, category, word, setWord}) => {
                       select
                       label="Language"
                       value={category}
-                      onChange={(e) =>handleChange(e)}
+                      onChange={(e) => handleChange(e)}
                       className="select"
                       
                       
